@@ -1,17 +1,8 @@
 # -*- coding: utf-8 -*-
-import json
 import pandas as pd
-from pandas.io import gbq
-from google.cloud import bigquery
 from pandas import Series,DataFrame
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-import gspread
-import gspread_dataframe as gd
-from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime,timedelta
 import time
 from time import sleep
