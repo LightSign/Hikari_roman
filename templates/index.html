@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+<div class="header">
+    <p> 神ツール  </p>
+</div>
+
+<div class="form">
+  <div class="container">
+    <form action="/post" method="post" >
+      <p class='ebay_id' for="name"> eBay ログID </p>
+      <input class='search_box' type="text" id="ebay_id" name="ebay_id" placeholder="hoge@gmail.com">
+
+      <p class='ebay_pass' for="name"> eBay password </p>
+      <input class='search_box' type="password" id="ebay_pass" name="ebay_pass" placeholder="******">
+
+      <p class='search_keyword' for="name"> 検索キーワード </p>
+      <input class='search_box' type="text" id="search_keyword" name="search_keyword" placeholder="ゴジラ　フィギュア">
+
+      <p class='search_price' for="name"> 価格 </p>
+      <input class='search_box' type="text" id="price_lower" name="price_lower" placeholder="1000">
+      <span> 〜 </span>
+      <input class='search_box' type="text" id="price_upper" name="price_upper" placeholder="2000">
+
+      <p class='search_weight' for="name"> 基本重量 </p>
+      <input class='search_box' type="text" id="search_weight" name="search_weight" placeholder="1500">
+
+      <p class='' for="name"> 希望出品数 </p>
+      <input class='search_box' type="text" id="" name="tmp1" placeholder="250">
+
+      <p class='' for="name"> 予想総出品金額 </p>
+      <input class='search_box' type="text" id="" name="tmp2" placeholder="1250">
+      <span> 〜 </span>
+      <input class='search_box' type="text" id="" name="tmp3" placeholder="2500">
+
+      <button type="submit" class="btn">送信する</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

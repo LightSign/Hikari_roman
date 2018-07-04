@@ -1,0 +1,39 @@
+{% extends "layout2.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+<div class="header">
+    <p> 神ツール - 実行完了 -  </p>
+</div>
+
+<div class="container">
+    <p class='head'> eBay ログID </p>
+    <p class='input_data'>{{ ebay_id }}</p>
+
+    <p class='head'> eBay password </p>
+    <p class='input_data'>{{ ebay_pass }}</p>
+    <p class='head'> 検索キーワード </p>
+    <p class='input_data'>{{ search_keyword }}</p>
+    <p class='head'> 価格 </p>
+    <p class='input_data'>{{ price_lower }}</p>
+    <span> 〜 </span>
+    <p class='input_data'>{{ price_upper }}</p>
+    <p class='head'> 基本重量 </p>
+    <p class='input_data'>{{ search_weight }}</p>
+
+    <p class='head'> 希望出品数 </p>
+    <p class='input_data'>{{ tmp1 }}</p>
+
+    <p class='head'> 予想総出品金額 </p>
+    <p class='input_data'>{{ tmp2 }}</p>
+    <span> 〜 </span>
+    <p class='input_data'>{{ tmp3 }}</p>
+
+    <a href="/return_file/" target="blank"><button class="btn btn-default">
+    Download</button></a>
+
+</div>
+
+
+
+{% endblock %}

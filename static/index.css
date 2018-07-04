@@ -1,0 +1,30 @@
+/* index.css */
+
+div.header {
+    padding: 15px;
+    background-color: #13a6ff;
+}
+div.header p {
+    color: white;
+    font-size: 25px;
+}
+
+.form {
+    padding: 10px;
+}
+
+.form p {
+    padding: 10px 0px 10px 0px;
+    font-size: 22px;
+}
+
+
+.search_box , .search_price_box{
+    padding: 5px 15px 5px 2px ;
+}
+
+button{
+    margin-top: 20px;
+    padding: 10px 100px;
+    display: block;
+}
