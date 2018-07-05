@@ -1,7 +1,6 @@
 # Flask などの必要なライブラリをインポートする
 from flask import Flask, render_template, request, redirect, url_for , send_file
 from datetime import datetime,timedelta
-import numpy as np
 import subprocess
 from crawler import crawler
 
