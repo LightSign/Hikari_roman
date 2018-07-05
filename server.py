@@ -45,12 +45,11 @@ def post():
 
         c = crawler(search_keyword, int(price_lower), int(price_upper))
         df = c.run()
-        print(df)
 
         date = datetime.today().strftime("%Y%m%d_")
         PATH_to_file = "./data/"
         # index.html をレンダリングする
-        return send_file(PATH_to_file + "{0}{1}_table.csv".format(date,search_keyword) ,attachment_filename="{0}{1}_table.csv".format(date,search_keyword))
+        return send_file(df ,attachment_filename="{0}{1}_table.csv".format(date,search_keyword))
         return render_template('finish.html',
                                ebay_id = ebay_id,
                                ebay_pass = ebay_pass,
