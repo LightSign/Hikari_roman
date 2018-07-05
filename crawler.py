@@ -230,7 +230,7 @@ class crawler:
 
             else:
                 #########################商品削除ページ
-n                pc_url = " "
+                pc_url = " "
                 col_name = " "
                 ele_name = " "
                 descrip = " "
