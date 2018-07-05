@@ -17,13 +17,11 @@ class crawler:
         self.price_max = price_max
 
         # # ヘッドレスモードを有効にする（次の行をコメントアウトすると画面が表示される）。
-        options = Options()
-        options.binary_location = '/app/.apt/usr/bin/google-chrome'
+        self.options = Options()
+        self.options.binary_location = '/app/.apt/usr/bin/google-chrome'
         options.add_argument('--headless')
         options.add_argument('--disable-gpu')
-        browser = webdriver.Chrome(chrome_options=options)
-
-        self.browser = webdriver.Chrome()
+        self.browser = webdriver.Chrome(chrome_options=options)
         self.date = datetime.today().strftime("%Y%m%d_")
 
     def srch_scray_test(self, query, price_min, price_max):
