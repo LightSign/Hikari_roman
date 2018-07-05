@@ -2,6 +2,7 @@
 import pandas as pd
 from pandas import Series,DataFrame
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from datetime import datetime,timedelta
 import time
@@ -16,9 +17,12 @@ class crawler:
         self.price_max = price_max
 
         # # ヘッドレスモードを有効にする（次の行をコメントアウトすると画面が表示される）。
-        # options = Options()
-        # options.binary_location = '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
-        # options.add_argument('--headless')
+        options = Options()
+        options.binary_location = '/app/.apt/usr/bin/google-chrome'
+        options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        browser = webdriver.Chrome(chrome_options=options)
+
         self.browser = webdriver.Chrome()
         self.date = datetime.today().strftime("%Y%m%d_")
 
