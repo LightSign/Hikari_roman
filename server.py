@@ -44,7 +44,8 @@ def post():
         tmp3 = request.form['tmp3']
 
         c = crawler(search_keyword, int(price_lower), int(price_upper))
-        c.run()
+        df = c.run()
+        print(df)
 
         date = datetime.today().strftime("%Y%m%d_")
         PATH_to_file = "./data/"
