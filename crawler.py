@@ -19,9 +19,9 @@ class crawler:
         # # ヘッドレスモードを有効にする（次の行をコメントアウトすると画面が表示される）。
         self.options = Options()
         self.options.binary_location = '/app/.apt/usr/bin/google-chrome'
-        options.add_argument('--headless')
-        options.add_argument('--disable-gpu')
-        self.browser = webdriver.Chrome(chrome_options=options)
+        self.options.add_argument('--headless')
+        self.options.add_argument('--disable-gpu')
+        self.browser = webdriver.Chrome(chrome_options=self.options)
         self.date = datetime.today().strftime("%Y%m%d_")
 
     def srch_scray_test(self, query, price_min, price_max):
