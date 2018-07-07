@@ -99,7 +99,7 @@ def _make_data():
             csv_file = cStringIO.StringIO()
             writer = csv.writer(csv_file, quoting=csv.QUOTE_NONE, delimiter=',', quotechar=',')
             writer.writerows(data)
-            #writer.writerows(data.values)
+            writer.writerows(data.values)
             return csv_file.getvalue()
 
         def make_csv(file_csv):
