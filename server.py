@@ -87,8 +87,8 @@ def _make_data():
 
         req = browser.page_source
         all_html = bs(req,"lxml")
-        posts = all_html.select(".items-box")
-        df = posts[0].select("h3.items-box-name")[0].getText()
+        df = all_html.select(".items-box")
+        # df = posts[0].select("h3.items-box-name")[0].getText()
         browser.close()
 
         def _make_file(data):
