@@ -66,7 +66,7 @@ def _make_data():
 
         date = datetime.today().strftime("%Y%m%d_")
         browser.get(URL)
-
+        global df
         #browser.get("https://www.mercari.com/jp/search/?sort_order=&keyword={0}&category_root=&brand_name=&brand_id=&size_group=&price_min={1}&price_max={2}".format(query,price_min,price_max))
         posts = browser.find_elements_by_css_selector(".items-box")
         for post in posts:
