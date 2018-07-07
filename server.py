@@ -80,8 +80,7 @@ def _make_data():
         #     se = pd.Series([title, price, sold,url],['title','price','sold','url'])
         #     df = df.append(se, ignore_index=True)
         #df["title"] = df["title"].str.replace(r"\W"," ")
-
-        df = browser.page_source
+        df = browser.find_elements_by_css_selector("span#USDJPY_top_bid.dtl")[0].text
         browser.close()
 
         def _make_file(data):
