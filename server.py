@@ -28,6 +28,7 @@ def index():
     title = "ATOM : 実行ページ"
     return render_template('index.html',title=title)
 
+df = pd.DataFrame(index=[] , columns=[])
 #/post にアクセスしたときの処理
 @app.route('/post', methods=['GET', 'POST'])
 def _make_data():
@@ -63,24 +64,28 @@ def _make_data():
         # browser = webdriver.Chrome()
         # browser.implicitly_wait(20)
 
-        df = pd.DataFrame(index=[] , columns=[])
         date = datetime.today().strftime("%Y%m%d_")
         browser.get(URL)
 
         #browser.get("https://www.mercari.com/jp/search/?sort_order=&keyword={0}&category_root=&brand_name=&brand_id=&size_group=&price_min={1}&price_max={2}".format(query,price_min,price_max))
-        # posts = browser.find_elements_by_css_selector(".items-box")
-        # for post in posts:
-        #     title = post.find_element_by_css_selector("h3.items-box-name").text
-        #     price = post.find_element_by_css_selector(".items-box-price").text
-        #     price = price.replace('¥', '').replace(",","")
-        #     sold = 0
-        #     if len(post.find_elements_by_css_selector(".item-sold-out-badge")) > 0:
-        #         sold = 1
-        #     url = post.find_element_by_css_selector("a").get_attribute("href")
-        #     se = pd.Series([title, price, sold,url],['title','price','sold','url'])
-        #     df = df.append(se, ignore_index=True)
-        #df["title"] = df["title"].str.replace(r"\W"," ")
-        df = browser.find_elements_by_css_selector("span#USDJPY_top_bid.dtl")[0].text
+        posts = browser.find_elements_by_css_selector(".items-box")
+        for post in posts:
+            title = post.find_element_by_css_selector("h3.items-box-name").text
+            price = post.find_element_by_css_selector(".items-box-price").text
+            price = price.replace('¥', '').replace(",","")
+            sold = 0
+            if len(post.find_elements_by_css_selector(".item-sold-out-badge")) > 0:
+                sold = 1
+            url = post.find_element_by_css_selector("a").get_attribute("href")
+            se = pd.Series([title, price, sold,url],['title','price','sold','url'])
+            df = df.append(se, ignore_index=True)
+        df["title"] = df["title"].str.replace(r"\W"," ")
+
+        ### ヤフーファイナンス株価取得確認用
+        # https://info.finance.yahoo.co.jp/fx/
+        # df = browser.find_elements_by_css_selector("span#USDJPY_top_bid.dtl")[0].text
+        ### ヤフーファイナンス株価取得確認用
+
         browser.close()
 
         def _make_file(data):
