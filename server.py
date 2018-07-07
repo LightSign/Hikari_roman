@@ -84,12 +84,12 @@ def _make_data():
 
         ### ヤフーファイナンス株価取得確認用
         # https://info.finance.yahoo.co.jp/fx/
-        # df = browser.find_elements_by_css_selector("span#USDJPY_top_bid.dtl")[0].text
+        df = browser.find_elements_by_css_selector("span#USDJPY_top_bid.dtl")[0].text
         ### ヤフーファイナンス株価取得確認用
 
-        req = browser.page_source
-        all_html = bs(req,"lxml")
-        df = all_html.select(".items-box")
+        # req = browser.page_source
+        # all_html = bs(req,"lxml")
+        # df = all_html.select(".items-box")
         # df = posts[0].select("h3.items-box-name")[0].getText()
         browser.close()
 
