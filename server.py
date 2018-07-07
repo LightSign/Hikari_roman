@@ -57,7 +57,9 @@ def _make_data():
         options.add_argument('headless')
         options.add_argument('window-size=1200x600')
         browser = webdriver.Chrome(chrome_options=options)
+        browser.implicitly_wait(20)
         # browser = webdriver.Chrome()
+
         df = pd.DataFrame(index=[] , columns=[])
         date = datetime.today().strftime("%Y%m%d_")
         browser.get(URL)
@@ -82,7 +84,7 @@ def _make_data():
             csv_file = cStringIO.StringIO()
             writer = csv.writer(csv_file, quoting=csv.QUOTE_NONE, delimiter=',', quotechar='')
             writer.writerow(data)
-            # writer.writerows(data.values)
+            writer.writerows(data.values)
             return csv_file.getvalue()
 
         def make_csv(file_csv):
@@ -95,7 +97,6 @@ def _make_data():
             response.headers['Content-Disposition'] = 'attachment; filename=ATOM_test.csv'
             return response
 
-        df = URL
         file_csv = _make_file(df)
         csv_data = make_csv(file_csv)
         return csv_data
