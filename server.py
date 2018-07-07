@@ -66,19 +66,22 @@ def _make_data():
         df = pd.DataFrame(index=[] , columns=[])
         date = datetime.today().strftime("%Y%m%d_")
         browser.get(URL)
+
         #browser.get("https://www.mercari.com/jp/search/?sort_order=&keyword={0}&category_root=&brand_name=&brand_id=&size_group=&price_min={1}&price_max={2}".format(query,price_min,price_max))
-        posts = browser.find_elements_by_css_selector(".items-box")
-        for post in posts:
-            title = post.find_element_by_css_selector("h3.items-box-name").text
-            price = post.find_element_by_css_selector(".items-box-price").text
-            price = price.replace('¥', '').replace(",","")
-            sold = 0
-            if len(post.find_elements_by_css_selector(".item-sold-out-badge")) > 0:
-                sold = 1
-            url = post.find_element_by_css_selector("a").get_attribute("href")
-            se = pd.Series([title, price, sold,url],['title','price','sold','url'])
-            df = df.append(se, ignore_index=True)
+        # posts = browser.find_elements_by_css_selector(".items-box")
+        # for post in posts:
+        #     title = post.find_element_by_css_selector("h3.items-box-name").text
+        #     price = post.find_element_by_css_selector(".items-box-price").text
+        #     price = price.replace('¥', '').replace(",","")
+        #     sold = 0
+        #     if len(post.find_elements_by_css_selector(".item-sold-out-badge")) > 0:
+        #         sold = 1
+        #     url = post.find_element_by_css_selector("a").get_attribute("href")
+        #     se = pd.Series([title, price, sold,url],['title','price','sold','url'])
+        #     df = df.append(se, ignore_index=True)
         #df["title"] = df["title"].str.replace(r"\W"," ")
+
+        df = browser.page_source
         browser.close()
 
         def _make_file(data):
