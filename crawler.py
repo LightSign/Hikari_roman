@@ -17,11 +17,12 @@ class crawler:
         self.price_max = price_max
 
         # # ヘッドレスモードを有効にする（次の行をコメントアウトすると画面が表示される）。
-        self.options = Options()
-        self.options.binary_location = '/app/.apt/usr/bin/google-chrome'
-        self.options.add_argument('--headless')
-        self.options.add_argument('--disable-gpu')
-        self.browser = webdriver.Chrome(chrome_options=self.options)
+        # self.options = Options()
+        # self.options.binary_location = '/app/.apt/usr/bin/google-chrome'
+        # self.options.add_argument('--headless')
+        # self.options.add_argument('--disable-gpu')
+        # self.browser = webdriver.Chrome(chrome_options=self.options)
+        self.browser = webdriver.Chrome()
         self.date = datetime.today().strftime("%Y%m%d_")
 
     def srch_scray_test(self, query, price_min, price_max):
@@ -70,6 +71,7 @@ class crawler:
         print("First list done then next")
         print("Total items are " + str(len(df)))
         date = datetime.today().strftime("%Y%m%d_")
+
 
         for i in range(0,len(df)):
             self.browser.get(df["url"][i])

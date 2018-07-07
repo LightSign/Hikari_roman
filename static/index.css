@@ -1,12 +1,12 @@
 /* index.css */
 
 div.header {
-    padding: 15px;
-    background-color: #13a6ff;
+    padding: 5px 5px 5px 2px ;
+    background-color: #87CEFA;
 }
 div.header p {
-    color: white;
-    font-size: 25px;
+    color: black;
+    font-size: 5px;
 }
 
 .form {
@@ -14,13 +14,12 @@ div.header p {
 }
 
 .form p {
-    padding: 10px 0px 10px 0px;
-    font-size: 22px;
+    padding: 5px 0px 5px 0px;
+    font-size: 15px;
 }
 
-
 .search_box , .search_price_box{
-    padding: 5px 15px 5px 2px ;
+    padding: 5px 5px 5px 2px ;
 }
 
 button{
