@@ -95,6 +95,7 @@ def _make_data():
             response.headers['Content-Disposition'] = 'attachment; filename=ATOM_test.csv'
             return response
 
+        df = "test"
         file_csv = _make_file(df)
         csv_data = make_csv(file_csv)
         return csv_data
