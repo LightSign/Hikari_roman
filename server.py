@@ -78,7 +78,7 @@ def _make_data():
             url = post.find_element_by_css_selector("a").get_attribute("href")
             se = pd.Series([title, price, sold,url],['title','price','sold','url'])
             df = df.append(se, ignore_index=True)
-        df["title"] = df["title"].str.replace(r"\W"," ")
+        #df["title"] = df["title"].str.replace(r"\W"," ")
         browser.close()
 
         def _make_file(data):
