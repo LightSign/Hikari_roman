@@ -47,7 +47,13 @@ def _make_data():
         書き込みデータ作成
         """
         # make data
-        browser = webdriver.Chrome()
+
+        options = Options()
+        options.binary_location = '/app/.apt/usr/bin/google-chrome'
+        options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        browser = webdriver.Chrome(chrome_options=options)
+        # browser = webdriver.Chrome()
         df = pd.DataFrame(index=[] , columns=[])
         date = datetime.today().strftime("%Y%m%d_")
         browser.get(URL)
