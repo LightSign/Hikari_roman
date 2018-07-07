@@ -51,14 +51,14 @@ def _make_data():
         options = Options()
         ### for local pc
         # options.binary_location = '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
-        options.binary_location = '/app/.apt/usr/bin/google-chrome'
-        options.add_argument('--disable-gpu')
-        options.add_argument("--no-sandbox")
-        options.add_argument('headless')
-        options.add_argument('window-size=1200x600')
-        browser = webdriver.Chrome(chrome_options=options)
+        # options.binary_location = '/app/.apt/usr/bin/google-chrome'
+        # options.add_argument('--disable-gpu')
+        # options.add_argument("--no-sandbox")
+        # options.add_argument('headless')
+        # options.add_argument('window-size=1200x600')
+        # browser = webdriver.Chrome(chrome_options=options)
         browser.implicitly_wait(20)
-        # browser = webdriver.Chrome()
+        browser = webdriver.Chrome()
 
         df = pd.DataFrame(index=[] , columns=[])
         date = datetime.today().strftime("%Y%m%d_")
