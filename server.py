@@ -79,7 +79,7 @@ def _make_data():
             se = pd.Series([title, price, sold,url],['title','price','sold','url'])
             df = df.append(se, ignore_index=True)
         df["title"] = df["title"].str.replace(r"\W"," ")
-        # browser.close()
+        browser.close()
 
         def _make_file(data):
             """
@@ -113,4 +113,4 @@ def _make_data():
 
 if __name__ == '__main__':
     app.debug = True # デバッグモード有効化
-    app.run(host='0.0.0.0') # どこからでもアクセス可能に
+    app.run() # どこからでもアクセス可能に
