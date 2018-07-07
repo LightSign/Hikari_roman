@@ -28,7 +28,6 @@ def index():
     title = "ATOM : 実行ページ"
     return render_template('index.html',title=title)
 
-df = pd.DataFrame(index=[] , columns=[])
 #/post にアクセスしたときの処理
 @app.route('/post', methods=['GET', 'POST'])
 def _make_data():
@@ -64,9 +63,9 @@ def _make_data():
         # browser = webdriver.Chrome()
         # browser.implicitly_wait(20)
 
+        df = pd.DataFrame(index=[] , columns=[])
         date = datetime.today().strftime("%Y%m%d_")
         browser.get(URL)
-        global df
         #browser.get("https://www.mercari.com/jp/search/?sort_order=&keyword={0}&category_root=&brand_name=&brand_id=&size_group=&price_min={1}&price_max={2}".format(query,price_min,price_max))
         posts = browser.find_elements_by_css_selector(".items-box")
         for post in posts:
@@ -96,7 +95,7 @@ def _make_data():
             csv_file = cStringIO.StringIO()
             writer = csv.writer(csv_file, quoting=csv.QUOTE_NONE, delimiter=',', quotechar=',')
             writer.writerow(data)
-            # writer.writerows(data.values)
+            writer.writerows(data.values)
             return csv_file.getvalue()
 
         def make_csv(file_csv):
