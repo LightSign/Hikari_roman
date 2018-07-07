@@ -51,7 +51,10 @@ def _make_data():
         options = Options()
         options.binary_location = '/app/.apt/usr/bin/google-chrome'
         # options.add_argument('--headless')
-        # options.add_argument('--disable-gpu')
+        options.add_argument('--disable-gpu')
+        options.add_argument("--no-sandbox")
+        options.add_argument('headless')
+        options.add_argument('window-size=1200x600')
         browser = webdriver.Chrome(chrome_options=options)
         # browser = webdriver.Chrome()
         df = pd.DataFrame(index=[] , columns=[])
@@ -88,7 +91,7 @@ def _make_data():
             response = make_response()
             response.data = file_csv
             response.headers['Content-Type'] = 'application/octet-stream'
-            response.headers['Content-Disposition'] = 'attachment; filename=sample1.csv'
+            response.headers['Content-Disposition'] = 'attachment; filename=ATOM_test.csv'
             return response
 
         file_csv = _make_file(df)
