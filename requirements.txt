@@ -1,5 +1,5 @@
 Flask==0.12
-Flask-Cors==3.0.2
+Flask-Cors==3.0.6
 pandas==0.19.2
 pandas-access==0.0.1
 pandas-datareader==0.3.0.post0
