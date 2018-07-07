@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, redirect, url_for , make_response,Response
+from flask_cors import CORS, cross_origin
 from datetime import datetime,timedelta
 import subprocess
 import pandas as pd
