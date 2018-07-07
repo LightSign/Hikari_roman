@@ -57,8 +57,8 @@ def _make_data():
         # options.add_argument('headless')
         # options.add_argument('window-size=1200x600')
         # browser = webdriver.Chrome(chrome_options=options)
-        browser.implicitly_wait(20)
         browser = webdriver.Chrome()
+        browser.implicitly_wait(20)
 
         df = pd.DataFrame(index=[] , columns=[])
         date = datetime.today().strftime("%Y%m%d_")
