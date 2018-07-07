@@ -57,7 +57,7 @@ def _make_data():
         # options.add_argument('--disable-gpu')
         # options.add_argument("--no-sandbox")
         # options.add_argument('headless')
-        # options.add_argument('window-size=1200x600')
+        options.add_argument('window-size=1200x600')
         # browser = webdriver.Chrome(chrome_options=options)
         browser = webdriver.Chrome(chrome_options=options)
         browser.implicitly_wait(20)
