@@ -3,5 +3,5 @@ Flask-Cors==3.0.6
 pandas==0.19.2
 pandas-access==0.0.1
 pandas-datareader==0.3.0.post0
-selenium==2.45.0
+selenium==3.8.0
 gunicorn==19.9.0
