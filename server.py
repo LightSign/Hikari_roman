@@ -50,8 +50,8 @@ def _make_data():
 
         options = Options()
         options.binary_location = '/app/.apt/usr/bin/google-chrome'
-        options.add_argument('--headless')
-        options.add_argument('--disable-gpu')
+        # options.add_argument('--headless')
+        # options.add_argument('--disable-gpu')
         browser = webdriver.Chrome(chrome_options=options)
         # browser = webdriver.Chrome()
         df = pd.DataFrame(index=[] , columns=[])
