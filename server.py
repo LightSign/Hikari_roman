@@ -25,13 +25,13 @@ CORS(app)
 # index にアクセスしたときの処理
 @app.route('/')
 def index():
-    title = "神ツール : 実行ページ"
+    title = "ATOM : 実行ページ"
     return render_template('index.html',title=title)
 
 #/post にアクセスしたときの処理
 @app.route('/post', methods=['GET', 'POST'])
 def _make_data():
-    title = "神ツール : 結果ページ"
+    title = "ATOM : 結果ページ"
     if request.method == 'POST':
         # リクエストフォームから「名前」を取得して
         # ebay_id = request.form['ebay_id']
@@ -52,15 +52,16 @@ def _make_data():
 
         options = Options()
         ### for local pc
-        # options.binary_location = '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
+        #options.binary_location = '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
         options.binary_location = '/app/.apt/usr/bin/google-chrome'
         options.add_argument('--disable-gpu')
         options.add_argument("--no-sandbox")
-        options.add_argument('headless')
+        options.add_argument('--headless')
         options.add_argument('window-size=1200x600')
-
         browser = webdriver.Chrome(chrome_options=options)
-        browser.implicitly_wait(20)
+
+        # browser = webdriver.Chrome()
+        # browser.implicitly_wait(20)
 
         df = pd.DataFrame(index=[] , columns=[])
         date = datetime.today().strftime("%Y%m%d_")
@@ -77,14 +78,16 @@ def _make_data():
             url = post.find_element_by_css_selector("a").get_attribute("href")
             se = pd.Series([title, price, sold,url],['title','price','sold','url'])
             df = df.append(se, ignore_index=True)
-        df = df.astype("str")
+        df["title"] = df["title"].str.replace(r"\W"," ")
+        # browser.close()
 
         def _make_file(data):
             """
             データを CSV 形式に変換
             """
+            print("make file")
             csv_file = cStringIO.StringIO()
-            writer = csv.writer(csv_file, quoting=csv.QUOTE_NONE, delimiter=',', quotechar='')
+            writer = csv.writer(csv_file, quoting=csv.QUOTE_NONE, delimiter=',', quotechar=',')
             writer.writerow(data)
             writer.writerows(data.values)
             return csv_file.getvalue()
@@ -93,6 +96,7 @@ def _make_data():
             """
             CSV 出力
             """
+            print("make csv")
             response = make_response()
             response.data = file_csv
             response.headers['Content-Type'] = 'application/octet-stream'
@@ -102,6 +106,7 @@ def _make_data():
         file_csv = _make_file(df)
         csv_data = make_csv(file_csv)
         return csv_data
+
     else:
         # エラーなどでリダイレクトしたい場合はこんな感じで
         return redirect(url_for('index'))
