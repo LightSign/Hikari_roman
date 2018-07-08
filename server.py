@@ -17,6 +17,7 @@ import codecs
 import csv
 import io as cStringIO
 from bs4 import BeautifulSoup as bs
+import requests
 
 # 自身の名称を app という名前でインスタンス化する
 app = Flask(__name__)
@@ -49,49 +50,26 @@ def _make_data():
         """
         書き込みデータ作成
         """
-        # make data
-
-        # options = Options()
-        # ### for local pc
-        # #options.binary_location = '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
-        # options.binary_location = '/app/.apt/usr/bin/google-chrome'
-        # options.add_argument('--disable-gpu')
-        # options.add_argument("--no-sandbox")
-        # options.add_argument('--headless')
-        # options.add_argument('window-size=1200x600')
-        # browser = webdriver.Chrome(chrome_options=options)
-
-        browser = webdriver.PhantomJS() # PhantomJSを使う
-        browser.set_window_size(1124, 850)
-        # browser.implicitly_wait(20)
-
-        browser.get(URL)
-
-        # df = pd.DataFrame(index=[] , columns=[])
-        # date = datetime.today().strftime("%Y%m%d_")
-        # posts = browser.find_elements_by_css_selector(".items-box")
-        # for post in posts:
-        #     title = post.find_element_by_css_selector("h3.items-box-name").text
-        #     price = post.find_element_by_css_selector(".items-box-price").text
-        #     price = price.replace('¥', '').replace(",","")
-        #     sold = 0
-        #     if len(post.find_elements_by_css_selector(".item-sold-out-badge")) > 0:
-        #         sold = 1
-        #     url = post.find_element_by_css_selector("a").get_attribute("href")
-        #     se = pd.Series([title, price, sold,url],['title','price','sold','url'])
-        #     df = df.append(se, ignore_index=True)
-        #df["title"] = df["title"].str.replace(r"\W"," ")
+        headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0",}
+        df = pd.DataFrame(index=[] , columns=[])
+        req = requests.get(URL ,headers=headers)
+        all_html = bs(req.content,"lxml")
+        posts = all_html.select(".items-box")
+        for post in posts:
+            title = post.select("h3.items-box-name")[0].getText()
+            price = post.select(".items-box-price")[0].getText()
+            price = price.replace('¥', '').replace(",","")
+            sold = 0
+            if len(post.select(".item-sold-out-badge")) > 0:
+                sold = 1
+            url = post.a.get("href")
+            se = pd.Series([title, price, sold,url],['title','price','sold','url'])
+            df = df.append(se, ignore_index=True)
+        df["title"] = df["title"].str.replace(r"\W"," ")
 
         ### ヤフーファイナンス株価取得確認用
         # https://info.finance.yahoo.co.jp/fx/
-        df = browser.find_elements_by_css_selector("span#USDJPY_top_bid.dtl")[0].text
         ### ヤフーファイナンス株価取得確認用
-
-        # req = browser.page_source
-        # all_html = bs(req,"lxml")
-        # df = all_html.select(".items-box")
-        # df = posts[0].select("h3.items-box-name")[0].getText()
-        browser.close()
 
         def _make_file(data):
             """
@@ -101,8 +79,7 @@ def _make_data():
             csv_file = cStringIO.StringIO()
             writer = csv.writer(csv_file, quoting=csv.QUOTE_NONE, delimiter=',', quotechar=',')
             writer.writerow(data)
-            writer.writerows(data)
-            # writer.writerows(data.values)
+            writer.writerows(data.values)
             return csv_file.getvalue()
 
         def make_csv(file_csv):

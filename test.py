@@ -11,6 +11,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from datetime import datetime,timedelta
 from time import sleep
+from bs4 import BeautifulSoup as bs
+import requests
 import re
 import random
 import codecs
@@ -48,36 +50,21 @@ def _make_data():
         """
         書き込みデータ作成
         """
-        # make data
-
-        # options = Options()
-        # ### for local pc
-        # options.binary_location = '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
-        # #options.binary_location = '/app/.apt/usr/bin/google-chrome'
-        # options.add_argument('--disable-gpu')
-        # options.add_argument("--no-sandbox")
-        # options.add_argument('--headless')
-        # options.add_argument('window-size=1200x600')
-        # browser = webdriver.Chrome(chrome_options=options)
-
-        driver = webdriver.PhantomJS() # PhantomJSを使う 
-        driver.set_window_size(1124, 850)
-        # browser = webdriver.Chrome()
-        # browser.implicitly_wait(20)
-
+        # site = "https://www.mercari.com/jp/search/?keyword=iPhone+SE+SIM%E3%83%95%E3%83%AA%E3%83%BC"
+        headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0",}
         df = pd.DataFrame(index=[] , columns=[])
-        date = datetime.today().strftime("%Y%m%d_")
-        browser.get(URL)
-        #browser.get("https://www.mercari.com/jp/search/?sort_order=&keyword={0}&category_root=&brand_name=&brand_id=&size_group=&price_min={1}&price_max={2}".format(query,price_min,price_max))
-        posts = browser.find_elements_by_css_selector(".items-box")
+        req = requests.get(URL ,headers=headers)
+        all_html = bs(req.content,"lxml")
+        posts = all_html.select(".items-box")
+
         for post in posts:
-            title = post.find_element_by_css_selector("h3.items-box-name").text
-            price = post.find_element_by_css_selector(".items-box-price").text
+            title = post.select("h3.items-box-name")[0].getText()
+            price = post.select(".items-box-price")[0].getText()
             price = price.replace('¥', '').replace(",","")
             sold = 0
-            if len(post.find_elements_by_css_selector(".item-sold-out-badge")) > 0:
+            if len(post.select(".item-sold-out-badge")) > 0:
                 sold = 1
-            url = post.find_element_by_css_selector("a").get_attribute("href")
+            url = post.a.get("href")
             se = pd.Series([title, price, sold,url],['title','price','sold','url'])
             df = df.append(se, ignore_index=True)
         df["title"] = df["title"].str.replace(r"\W"," ")
