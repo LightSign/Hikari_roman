@@ -129,6 +129,7 @@ def _make_data():
 
 
         df["rest_time"] = df["rest_time"].apply(lambda x : x.replace("日","") if x.endswith("日") else str(1))
+        df.to_csv("sample.csv",index=False)
         print(len(df))
         url_df = pd.DataFrame(index=[] , columns=[])
         for i in range(len(df)):
