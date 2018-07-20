@@ -48,6 +48,7 @@ def _make_data():
 
         # ヘッドレスモードを有効にする
         options = ChromeOptions()
+        options.binary_location = '/app/.apt/usr/bin/google-chrome'
         options.add_argument('--headless')
         browser = webdriver.Chrome(options=options)
         # browser = webdriver.Chrome()
