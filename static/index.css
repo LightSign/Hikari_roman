@@ -1,29 +1,279 @@
-/* index.css */
+/*--------------------------------------
+テキスト
+---------------------------------------*/
 
-div.h1 {
-    padding: 5px 5px 5px 2px ;
-    background-color: #87CEFA;
+.msr_text_02 {
+  padding-bottom: 20px;
+  width: 1000px;
 }
-div.header p {
-    color: black;
-    font-size: 5px;
+.msr_text_02  label {
+  display: block;
+  font-size: 14px;
+  padding-bottom: 5px;
+  width: 1000px;
+}
+.msr_text_02 input[type=text] {
+  border: 1px solid #1B73BA;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  color: #333;
+  font-size: 13px;
+  padding: 10px;
+  height: 1000px;
+  width: 1000px;
 }
 
-div.form {
-    padding: 10px;
+/*--------------------------------------
+ラジオボタン
+---------------------------------------*/
+
+.msr_radio_02 {
+  padding-bottom: 20px;
+}
+.msr_radio_02 p {
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+.msr_radio_02 input[type=radio] {
+  display: none;
+  margin: 0;
+}
+.msr_radio_02 input[type=radio] + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 1.5px;
+  margin-right: 12px;
+  padding: 0 0 3px 24px;
+  position: relative;
+}
+.msr_radio_02 input[type=radio] + label::before {
+  border: 1px solid #1B73BA;
+  border-radius: 50%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  content: "";
+  display: block;
+  margin-top: -9px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 13px;
+  width: 13px;
+}
+.msr_radio_02 input[type=radio]:checked + label::after {
+  background: #1B73BA;
+  border-radius: 50%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  content: "";
+  display: block;
+  margin-top: -4px;
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  height: 7px;
+  width: 7px;
 }
 
-.form p {
-    padding: 100px;
-    font-size: 15px;
+/*--------------------------------------
+チェックボックス
+---------------------------------------*/
+
+.msr_chack_02 {
+  padding-bottom: 20px;
+}
+.msr_chack_02 p {
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+.msr_chack_02 input[type=checkbox] {
+  display: none;
+  margin: 0;
+}
+.msr_chack_02 input[type=checkbox] + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 1.5px;
+  margin-right: 12px;
+  padding: 0 0 0 24px;
+  position: relative;
+}
+.msr_chack_02 input[type=checkbox] + label::before {
+  background: #1B73BA;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  content: "";
+  display: block;
+  margin-top: -9px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 14px;
+  width: 14px;
+}
+.msr_chack_02 input[type=checkbox]:checked + label::after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+}
+.msr_chack_02 input[type=checkbox]:checked + label::after {
+  border-bottom: 2px solid #fff;
+  border-left: 2px solid #fff;
+  left: 3px;
+  margin-top: -7px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  height: 6px;
+  width: 9px;
 }
 
-.search_box{
-    padding: 100px;
+/*--------------------------------------
+プルダウン
+---------------------------------------*/
+
+.msr_pulldown_02 {
+  padding-bottom: 20px;
+  position: relative;
+  width: 230px;
+}
+.msr_pulldown_02 p {
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+.msr_pulldown_02 select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: url(/stylerecipe_img/msr02_pulldown_btn01.png) no-repeat right;
+  border-top: 1px solid #1B73BA;
+  border-bottom: 1px solid #1B73BA;
+  border-left: 1px solid #1B73BA;
+  border-right: none;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  cursor: pointer;
+  color: #333;
+  text-indent: .01px;
+  text-overflow: "";
+  padding: 10px;
+  height: 40px;
+  width: 230px;
 }
 
-button{
-    margin-top: 20px;
-    padding: 10px 100px;
-    display: block;
+/*--------------------------------------
+ファイル選択
+---------------------------------------*/
+
+.msr_file_02 {
+  padding-bottom: 20px;
+  width: 460px;
+}
+.msr_file_02>p {
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+.msr_filebox_02 {
+  position: relative;
+}
+.msr_filebox_02 input[type=file] {
+  display: none;
+}
+.msr_filebox_02 label {
+  border: 1px solid #1B73BA;
+  cursor: pointer;
+  font-size: 14px;
+  display: block;
+  position: relative;
+  padding: 10px;
+  height: 20px;
+  width: 460px;
+}
+.msr_filebox_02 label:before {
+  background: #1B73BA;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  content: "Browse...";
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 40px;
+  width: 99px;
+}
+
+/*--------------------------------------
+テキストエリア
+---------------------------------------*/
+
+.msr_textarea_02 {
+  padding-bottom: 10px;
+  width: 460px;
+}
+.msr_textarea_02 label {
+  display: block;
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+.msr_textarea_02 textarea {
+  border: 1px solid #1B73BA;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  color: #333;
+  font-size: 13px;
+  padding: 10px;
+  height: 210px;
+  width: 460px;
+}
+
+/*--------------------------------------
+送信ボタン
+---------------------------------------*/
+.msr_sendbtn_02{
+  margin:0 0 10px;
+}
+.msr_sendbtn_02 input[type=submit] {
+  background: url(/stylerecipe_img/arrow_blue02.png) no-repeat;
+  background-position: 10px;
+  border: 2px solid #1B73BA;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  color: #1B73BA;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
+  -moz-transition: 0.2s ease-in-out;
+  -webkit-transition: 0.2s ease-in-out;
+  height: 40px;
+  width: 150px;
+}
+.msr_sendbtn_02 input[type=submit]:hover {
+  opacity: 0.6;
+}
+.msr_sendbtn_02 input[disabled=disabled] {
+  background: #B4B4B4 url(/stylerecipe_img/arrow_gray02.png) no-repeat;
+  background-position: 10px;
+  border: 2px solid #7E7E7E;
+  color: #7E7E7E;
+  cursor: default;
+}
+.msr_sendbtn_02 input[disabled=disabled]:hover {
+  opacity: 1;
 }

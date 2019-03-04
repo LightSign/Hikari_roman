@@ -1,71 +1,41 @@
 from flask import make_response
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 import pandas as pd
+from bs4 import BeautifulSoup as bs
+import requests
 
-def headless_browser():
-    options = webdriver.chrome.options.Options()
-    options.binary_location = '/app/.apt/usr/bin/google-chrome'
-    options.add_argument('--headless')
-    browser = webdriver.Chrome(chrome_options=options)
-    browser.set_page_load_timeout(10)
-    return browser
-
-def first_scray(URL, browser):
+def first_scray(URL):
+    headers = {
+    "User-Agent" : "Mozilla/5.0 (X11; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0",
+    }
     df = pd.DataFrame(index=[] , columns=[])
-    try:
-        browser.get(URL)
-        items = browser.find_elements_by_css_selector("div.s-item-container")
-        for item in items:
-            try:
-                title = item.find_element_by_css_selector("h2").text
-                item_url = item.find_element_by_css_selector("a").get_attribute("href")
-                # check whether prime or not
-                if item.find_elements_by_css_selector("i.a-icon.a-icon-jp.a-icon-prime-jp.a-icon-small.s-align-text-bottom"):
-                    prime = "prime"
-                else:
-                    prime = "no prime"
-                pic_split = item.find_element_by_css_selector("img").get_attribute("srcset").split(",")
-                pic_txt = ",".join(pic_split).split()
-                pic_list = []
-                for p_txt in pic_txt:
-                    if "jpg" in p_txt:
-                        pic_list.append(p_txt)
-                se = pd.Series(
-                    [title, item_url, prime, pic_list],
-                    ["title", "item_url", "prime", "pic_list"]
-                )
-                df = df.append(se, ignore_index=True)
-            except:
-                pass
-        browser.quit()
-    except Exception as e:
-        pass
+    res = requests.get(URL ,headers=headers)
+    soup = bs(res.content, "html.parser")
+    items = soup.select("div.s-item-container")
+    for item in items:
+        try:
+            title = item.select("img")[0].get("alt")
+            item_url = "https://www.amazon.co.jp" + item.select("a")[0].get("href")
+            # check whether prime or not
+            if item.find(class_="a-icon a-icon-jp a-icon-prime-jp a-icon-small s-align-text-bottom"):
+                prime = "prime"
+            else:
+                prime = "no prime"
+            pic_split = item.select("img")[0].get("srcset").split()
+            pic_txt = ",".join(pic_split).split()
+            picures_list = []
+            for p_txt in pic_txt:
+                if "jpg" in p_txt:
+                    picures_list.append(p_txt)
+            se = pd.Series(
+                [title, item_url, prime, picures_list],
+                ["title", "item_url", "prime", "picures_list"]
+            )
+            df = df.append(se, ignore_index=True)
+        except Exception as e:
+            pass
     return df
-
 import csv
 import io as cStringIO
-def return_csv(data):
-    def toCSV_format(data):
-        """データを CSV 形式に変換"""
-        csv_file = cStringIO.StringIO()
-        writer = csv.writer(csv_file, quoting=csv.QUOTE_NONE, delimiter=',', quotechar=',')
-        writer.writerow(data)
-        writer.writerows(data.values)
-        return csv_file.getvalue()
-
-    def make_csv(csv_format_df):
-        """CSV 出力"""
-        response = make_response()
-        response.data = csv_format_df
-        response.headers['Content-Type'] = 'application/octet-stream'
-        response.headers['Content-Disposition'] = 'attachment; filename=ATOM_test.csv'
-        return response
-
-    csv_format_df = toCSV_format(data)
-    csv_data = make_csv(csv_format_df)
-    return csv_data
-
 def download(df):
     f = cStringIO.StringIO()
     writer = csv.writer(f, quotechar='"', quoting=csv.QUOTE_ALL, lineterminator="\n")
@@ -73,7 +43,7 @@ def download(df):
     for i in range(len(df)):
         writer.writerow([
             df.item_url[i],
-            df.pic_list[i],
+            df.picures_list[i],
             df.prime[i],
             df.title[i]
         ])
