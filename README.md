@@ -1,3 +1,3 @@
 # Hikari_roman
 
-ゼロアポはないから。マジで。
+There is NO ZERO APPOINTMENT normally.
