@@ -38,7 +38,6 @@ def first_scray(URL, browser):
                 df = df.append(se, ignore_index=True)
             except:
                 pass
-        df = df.head(10).reset_index(drop=True)
         browser.quit()
     except Exception as e:
         pass
