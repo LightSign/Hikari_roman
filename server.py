@@ -18,14 +18,16 @@ def index():
 @app.route('/post', methods=['GET', 'POST'])
 def _make_data():
     if request.method == 'POST':
-        URL = request.form['URL']
-        """URLからスクレイピング"""
-        df = processing.first_scray(URL)
-        if len(df):
-            return processing.download(df)
-        return "新人「光のロマンで迫るからエラーが出ましたゾス」 ボス「いいから早くアポ取ってこいや」"
-    else:# リダイレクト
-        return redirect(url_for('index'))
+        if "https" in request.form["URL"]:
+            URL = request.form['URL']
+            """URLからスクレイピング"""
+            df = processing.first_scray(URL)
+            if len(df):
+                return processing.download(df)
+    shinjin = "新人「光のロマンで迫るからエラーが出ましたゾス」"
+    boss = "ボス「いいから早くアポ取ってこいや」"
+    return render_template('back.html',shinjin=shinjin, boss=boss)
+
 if __name__ == '__main__':
     app.debug = True # デバッグモード有効化
     app.run()
