@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import make_response
 import pandas as pd
 from bs4 import BeautifulSoup as bs
@@ -42,26 +43,15 @@ import io as cStringIO
 import random
 def download(df):
     txt = """
-    社歌！
-    早く円陣くめっ！
-    男のロマンで迫るなら
-    試練の道さえ怖くない
-    この世で一匹光通信（あるいは代理店名）の営業マンは
-    泣き言なんか言わないで
-    根性、根性、ド根性
-    俺がやらずに誰がやる
-    おっす完全オーダーやります
-    どっこい気合いであげてやる！
-    いいかお前ら！（おっす！）
-    昨日までのことは忘れて今日の数字を上げて
-    全員オーダーするからな！（おっす！）
-    入って来たばかりの新人も既存のメンバーも関係ねーんだよ
-    ぜってー数字にからめよ！（おっす！）
-    そん中でも、真っ先に受注あげんのはこの俺だー
-    （俺だっ、俺だっ、俺だっ、俺だっ、俺だっ、俺だっ、俺だっ…俺だっ！）
-    さらに、上乗せでアメックスのカードも社長にやらせんのはーこのー （俺だっっ！！！）
-    頑張れよ、せーの（パンッ！）（オッス！！！）
-    さー迷惑電話の開始ゾス！
+    MoshiMoshiWatakushyyyyy
+    NttnohoukaraOdenwashiteorimasu
+    Zosu
+    Osu
+    HikariNoRoman
+    KanzenOrderYarimasu
+    DokkoiKiaideAgeteYaru
+    ShigetaGod
+    KonoyodeIppikiHikarXXXXXXXNoEigyomanHa
     """
     txt_split = txt.split()
     file_name = random.choice(txt_split)

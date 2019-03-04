@@ -23,7 +23,7 @@ def _make_data():
         df = processing.first_scray(URL)
         if len(df):
             return processing.download(df)
-        return "光のロマンで迫るからエラーが出ましたゾス"
+        return "新人「光のロマンで迫るからエラーが出ましたゾス」 ボス「いいから早くアポ取ってこいや」"
     else:# リダイレクト
         return redirect(url_for('index'))
 if __name__ == '__main__':
