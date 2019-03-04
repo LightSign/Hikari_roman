@@ -30,7 +30,10 @@ def first_scray(URL, browser):
                 for p_txt in pic_txt:
                     if "jpg" in p_txt:
                         pic_list.append(p_txt)
-                se = pd.Series([title, item_url, prime], ["title", "item_url", "prime"])
+                se = pd.Series(
+                    [title, item_url, prime, pic_list],
+                    ["title", "item_url", "prime", "pic_list"]
+                )
                 df = df.append(se, ignore_index=True)
             except:
                 pass
