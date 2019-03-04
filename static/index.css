@@ -1,6 +1,6 @@
 /* index.css */
 
-div.header {
+div.h1 {
     padding: 5px 5px 5px 2px ;
     background-color: #87CEFA;
 }
@@ -9,17 +9,17 @@ div.header p {
     font-size: 5px;
 }
 
-.form {
+div.form {
     padding: 10px;
 }
 
 .form p {
-    padding: 5px 0px 5px 0px;
+    padding: 100px;
     font-size: 15px;
 }
 
-.search_box , .search_price_box{
-    padding: 5px 5px 5px 2px ;
+.search_box{
+    padding: 100px;
 }
 
 button{
