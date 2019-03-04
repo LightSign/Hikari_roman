@@ -23,7 +23,7 @@ def _make_data():
         df = processing.first_scray(URL)
         if len(df):
             return processing.download(df)
-        return "エラーです"
+        return "光のロマンで迫るからエラーが出ましたゾス"
     else:# リダイレクト
         return redirect(url_for('index'))
 if __name__ == '__main__':

@@ -10,28 +10,31 @@ def first_scray(URL):
     df = pd.DataFrame(index=[] , columns=[])
     res = requests.get(URL ,headers=headers)
     soup = bs(res.content, "html.parser")
-    items = soup.select("div.s-item-container")
-    for item in items:
-        try:
-            title = item.select("img")[0].get("alt")
-            item_url = "https://www.amazon.co.jp" + item.select("a")[0].get("href")
-            if item.find(class_="a-icon a-icon-jp a-icon-prime-jp a-icon-small s-align-text-bottom"):
-                prime = "prime"
-            else:
-                prime = "no prime"
-            pic_split = item.select("img")[0].get("srcset").split()
-            pic_txt = ",".join(pic_split).split()
-            picures_list = []
-            for p_txt in pic_txt:
-                if "jpg" in p_txt:
-                    picures_list.append(p_txt)
-            se = pd.Series(
-                [title, item_url, prime, picures_list],
-                ["title", "item_url", "prime", "picures_list"]
-            )
-            df = df.append(se, ignore_index=True)
-        except Exception as e:
-            pass
+    try:
+        items = soup.select("div.s-item-container")
+        for item in items:
+            try:
+                title = item.select("img")[0].get("alt")
+                item_url = "https://www.amazon.co.jp" + item.select("a")[0].get("href")
+                if item.find(class_="a-icon a-icon-jp a-icon-prime-jp a-icon-small s-align-text-bottom"):
+                    prime = "prime"
+                else:
+                    prime = "no prime"
+                pic_split = item.select("img")[0].get("srcset").split()
+                pic_txt = ",".join(pic_split).split()
+                picures_list = []
+                for p_txt in pic_txt:
+                    if "jpg" in p_txt:
+                        picures_list.append(p_txt)
+                se = pd.Series(
+                    [title, item_url, prime, picures_list],
+                    ["title", "item_url", "prime", "picures_list"]
+                )
+                df = df.append(se, ignore_index=True)
+            except Exception as e:
+                pass
+    except:
+        pass
     return df
 
 import csv
