@@ -5,8 +5,9 @@ import pandas as pd
 
 def headless_browser():
     options = webdriver.chrome.options.Options()
+    options.binary_location = '/app/.apt/usr/bin/google-chrome'
     options.add_argument('--headless')
-    browser = webdriver.Chrome(chrome_options=options ,executable_path="./chromedriver")
+    browser = webdriver.Chrome(chrome_options=options)
     browser.set_page_load_timeout(10)
     return browser
 
