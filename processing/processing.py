@@ -5,7 +5,7 @@ import pandas as pd
 
 def headless_browser():
     options = webdriver.chrome.options.Options()
-    options.binary_location = '/app/.apt/usr/bin/google-chrome'
+    # options.binary_location = '/app/.apt/usr/bin/google-chrome'
     options.add_argument('--headless')
     browser = webdriver.Chrome(chrome_options=options)
     browser.set_page_load_timeout(10)
@@ -66,3 +66,20 @@ def return_csv(data):
     csv_format_df = toCSV_format(data)
     csv_data = make_csv(csv_format_df)
     return csv_data
+
+def download(df):
+    f = cStringIO.StringIO()
+    writer = csv.writer(f, quotechar='"', quoting=csv.QUOTE_ALL, lineterminator="\n")
+    writer.writerow(['item_url','pic_list','prime','title'])
+    for i in range(len(df)):
+        writer.writerow([
+            df.item_url[i],
+            df.pic_list[i],
+            df.prime[i],
+            df.title[i]
+        ])
+    res = make_response()
+    res.data = f.getvalue()
+    res.headers['Content-Type'] = 'text/csv'
+    res.headers['Content-Disposition'] = 'attachment; filename='+ "test" +'.csv'
+    return res

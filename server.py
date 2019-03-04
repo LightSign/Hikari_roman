@@ -24,7 +24,7 @@ def _make_data():
         browser = processing.headless_browser()
         df = processing.first_scray(URL, browser)
         if len(df):
-            return processing.return_csv(df)
+            return processing.download(df)
         return "エラーです"
     else:# エラーなどでリダイレクトしたい場合はこんな感じで
         return redirect(url_for('index'))
